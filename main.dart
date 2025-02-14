@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:js' as js;
-
-/// Entrypoint of the application.
 void main() {
   runApp(const MyApp());
 }
 
-/// Application itself.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -19,7 +16,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// [Widget] displaying the home page consisting of an image and the buttons.
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -27,13 +23,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-/// State of a [HomePage].
 class _HomePageState extends State<HomePage> {
   String _imageUrl = '';
   bool _isFullscreen = false;
   bool _showMenu = false;
 
-  /// Toggles fullscreen mode using JavaScript interop.
+
   void _toggleFullscreen() {
     if (_isFullscreen) {
       js.context.callMethod('exitFullscreen');
@@ -45,21 +40,18 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  /// Displays the image using an HTML <img> element.
   void _showImage() {
     if (_imageUrl.isNotEmpty) {
       js.context.callMethod('displayImage', [_imageUrl]);
     }
   }
 
-  /// Toggles the visibility of the context menu.
   void _toggleMenu() {
     setState(() {
       _showMenu = !_showMenu;
     });
   }
 
-  /// Closes the context menu.
   void _closeMenu() {
     setState(() {
       _showMenu = false;
